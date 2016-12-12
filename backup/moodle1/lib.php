@@ -61,7 +61,7 @@ class moodle1_qtype_matchwiris_handler extends moodle1_qtype_match_handler {
     }
 
     protected function wrsqz_get_cas_for_computations($data) {
-       
+
         $wrap = com_wiris_system_CallWrapper::getInstance();
 
         $wirisquestion = '';
@@ -96,7 +96,7 @@ class moodle1_qtype_matchwiris_handler extends moodle1_qtype_match_handler {
     }
 
     protected function wrsqz_hidden_initial_cas_value($data) {
-        
+
         $wrap = com_wiris_system_CallWrapper::getInstance();
 
         $wirisquestion = '';
