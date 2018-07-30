@@ -31,8 +31,8 @@ class moodle1_qtype_matchwiris_handler extends moodle1_qtype_match_handler {
         return array(
             'MATCHOPTIONS',
             'MATCHS/MATCH',
-            'MATCHWiris',
-            'MATCHWiris/WirisOPTIONS'
+            'MATCHWIRIS',
+            'MATCHWIRIS/WIRISOPTIONS'
         );
     }
 
