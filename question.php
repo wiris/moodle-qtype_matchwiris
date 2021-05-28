@@ -33,14 +33,40 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
     public $choices;
     public $right;
 
+    public $originalchoices;
+
+    // Added override in order to exclude repeating values
+    public function start_attempt(question_attempt_step $step, $variant) {
+
+        if($this->originalchoices == null) {
+            $this->originalchoices = array();
+            $this->originalchoices = $this->base->choices;
+        }
+
+        parent::start_attempt($step, $variant);
+        $this->extend_variables_and_check_right_array();
+
+        // We call the parent start_attempt method again in order to set the choiceorder
+        parent::start_attempt($step, $variant);
+    }
+    
+    public function grade_response(array $response) {
+        $this->extend_variables_and_check_right_array();
+
+        list($right, $total) = $this->get_num_parts_right($response);
+        $fraction = $right / $total;
+        return array($fraction, question_state::graded_state_for_fraction($fraction));
+    }
+
     public function join_all_text() {
         $text = parent::join_all_text();
+
         // Stems (matching left hand side).
         foreach ($this->stems as $key => $value) {
             $text .= ' ' . $value;
         }
         // Choices (matching right hand side).
-        foreach ($this->choices as $key => $value) {
+        foreach ($this->originalchoices as $key => $value) {
             $text .= ' ' . $value;
         }
         // Combined feedback.
@@ -55,8 +81,51 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
     public function get_choice_order() {
         return $this->base->get_choice_order();
     }
+
     public function get_right_choice_for($stemid) {
+        $this->extend_variables_and_check_right_array();
+
         return $this->base->get_right_choice_for($stemid);
     }
 
+
+    public function get_correct_response() {
+        $response = array();
+        foreach ($this->base->get_stem_order() as $key => $stemid) {
+            $response[$this->field($key)] = $this->get_right_choice_for($stemid);
+        }
+        return $response;
+    }
+
+    // Added in order to fix the issue where variables with duplicated values
+    // may repeat choices and evaluate wrong.
+    protected function extend_variables_and_check_right_array(){
+        foreach ($this->base->choices as $choice) {
+            $key = array_search($choice, $this->base->choices);
+            $this->base->choices[$key] = $this->expand_variables_text($choice);
+        }
+
+        // Getting right array done again
+        foreach($this->base->choices as $choice){
+            $keys = array_keys($this->base->choices, $choice);
+            if(count($keys) > 1) {
+                $def_key = $keys[0];
+                foreach($keys as $key) {
+                    if($key != $keys[0]){
+                        // We get rid of repeated choices
+                        unset($this->base->choices[$key]);
+                        $this->base->right[$key] = $def_key;
+                    }
+                } 
+            }
+        }
+    }
+
+    /**
+     * @param int $key stem number
+     * @return string the question-type variable name.
+     */
+    protected function field($key) {
+        return 'sub' . $key;
+    }
 }
