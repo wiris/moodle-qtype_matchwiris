@@ -64,4 +64,3 @@ Feature: A student can answer a MAtch Wiris question type
     And I click on "//input[@type='button']" "xpath_element"
     Then Generalfeedback should exist
     And Wirisformula should exist
-    
