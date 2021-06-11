@@ -30,7 +30,7 @@ Feature: Test creating a Matching Wiris question
     And I add the variable "b" with value "2"
     And I add the variable "c" with value "3"
     And I click on "//*[@id='wrsUI_quizzesStudioHomeSaveButton']" "xpath_element"
-    Then I set the following fields to these values:      
+    Then I set the following fields to these values:
       | Question name                      | match-wiris-001                  |
       | Question text                      | Match the numbers.               |
       | General feedback                   | One=#a, Two=#b and Three=#3.     |

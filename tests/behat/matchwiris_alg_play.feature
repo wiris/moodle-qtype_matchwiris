@@ -57,7 +57,6 @@ Feature: A student can answer a MAtch Wiris question type
     And I am on "Course 1" course homepage
     And I follow "Quiz 1"
     And I press "Attempt quiz now"
-    And I wait "5" seconds
     And I set the field with xpath "//table[@class='answer']//td[@class='control']//select[contains(@id, '1_sub0')]" to "1"
     And I set the field with xpath "//table[@class='answer']//td[@class='control']//select[contains(@id, '1_sub1')]" to "2"
     And I click on "Finish attempt" "button"
@@ -65,3 +64,4 @@ Feature: A student can answer a MAtch Wiris question type
     And I click on "//input[@type='button']" "xpath_element"
     Then Generalfeedback should exist
     And Wirisformula should exist
+    
