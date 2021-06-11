@@ -104,7 +104,7 @@ class qtype_matchwiris_test_helper extends question_test_helper {
         return $q;
     }
 
-     /**
+    /**
      * Makes a match question about completing four blanks in some text.
      * @return object the question definition data, as it might be returned from
      *      the question editing form.
