@@ -1,6 +1,6 @@
 # Wiris Quizzes Matching question type
-
-[![Moodle Plugin CI](https://github.com/wiris/moodle-qtype_matchwiris/actions/workflows/ci.yml/badge.svg)](https://github.com/wiris/moodle-qtype_matchwiris/actions/workflows/ci.yml)
+### Master Build Status
+[![Build Status](https://travis-ci.com/wiris/moodle-qtype_matchwiris.svg)](https://travis-ci.com/wiris/moodle-qtype_matchwiris)
 
 The Wiris Matching question type extends the Moodle matching type, adding mathematical functionality to it.
 

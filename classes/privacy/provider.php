@@ -38,9 +38,7 @@ class provider implements
      *
      * @return  string
      */
-    // @codingStandardsIgnoreStart
     public static function _get_reason() {
-        // @codingStandardsIgnoreEnd
         return 'privacy:null_reason';
     }
 }
