@@ -38,9 +38,9 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
     // Added override in order to exclude repeating values.
     public function start_attempt(question_attempt_step $step, $variant) {
 
-        if($this->originalchoices == null) {
+        if ($this->originalchoices == null) {
             $this->originalchoices = $this->base->choices;
-        };
+        }
 
         parent::start_attempt($step, $variant);
         $this->extend_variables_and_check_right_array();
@@ -92,32 +92,32 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
         $response = array();
         foreach ($this->base->get_stem_order() as $key => $stemid) {
             $response[$this->field($key)] = $this->get_right_choice_for($stemid);
-        };
+        }
         return $response;
     }
 
     // Added in order to fix the issue where variables with duplicated values
     // may repeat choices and evaluate wrong.
-    protected function extend_variables_and_check_right_array(){
+    protected function extend_variables_and_check_right_array() {
         foreach ($this->base->choices as $choice) {
             $key = array_search($choice, $this->base->choices);
             $this->base->choices[$key] = $this->expand_variables_text($choice);
-        };
+        }
 
         // Getting right array done again.
-        foreach($this->base->choices as $choice){
+        foreach($this->base->choices as $choice) {
             $keys = array_keys($this->base->choices, $choice);
-            if(count($keys) > 1) {
+            if (count($keys) > 1) {
                 $defkey = $keys[0];
-                foreach($keys as $key) {
-                    if($key != $keys[0]) {
+                foreach ($keys as $key) {
+                    if ($key != $keys[0]) {
                         // We get rid of repeated choices.
                         unset($this->base->choices[$key]);
                         $this->base->right[$key] = $defkey;
-                    };
-                };
-            };
-        };
+                    }
+                }
+            }
+        }
     }
 
     /**
