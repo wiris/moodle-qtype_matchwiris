@@ -105,7 +105,7 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
         }
 
         // Getting right array done again.
-        foreach($this->base->choices as $choice) {
+        foreach ($this->base->choices as $choice) {
             $keys = array_keys($this->base->choices, $choice);
             if (count($keys) > 1) {
                 $defkey = $keys[0];
