@@ -39,7 +39,6 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
     public function start_attempt(question_attempt_step $step, $variant) {
 
         if($this->originalchoices == null) {
-            $this->originalchoices = array();
             $this->originalchoices = $this->base->choices;
         }
 
