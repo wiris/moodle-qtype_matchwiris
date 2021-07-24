@@ -35,20 +35,20 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
 
     public $originalchoices;
 
-    // Added override in order to exclude repeating values
+    // Added override in order to exclude repeating values.
     public function start_attempt(question_attempt_step $step, $variant) {
 
         if($this->originalchoices == null) {
             $this->originalchoices = $this->base->choices;
-        }
+        };
 
         parent::start_attempt($step, $variant);
         $this->extend_variables_and_check_right_array();
 
-        // We call the parent start_attempt method again in order to set the choiceorder
+        // We call the parent start_attempt method again in order to set the choiceorder.
         parent::start_attempt($step, $variant);
     }
-    
+
     public function grade_response(array $response) {
         $this->extend_variables_and_check_right_array();
 
@@ -92,7 +92,7 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
         $response = array();
         foreach ($this->base->get_stem_order() as $key => $stemid) {
             $response[$this->field($key)] = $this->get_right_choice_for($stemid);
-        }
+        };
         return $response;
     }
 
@@ -102,22 +102,22 @@ class qtype_matchwiris_question extends qtype_wq_question implements question_au
         foreach ($this->base->choices as $choice) {
             $key = array_search($choice, $this->base->choices);
             $this->base->choices[$key] = $this->expand_variables_text($choice);
-        }
+        };
 
-        // Getting right array done again
+        // Getting right array done again.
         foreach($this->base->choices as $choice){
             $keys = array_keys($this->base->choices, $choice);
             if(count($keys) > 1) {
-                $def_key = $keys[0];
+                $defkey = $keys[0];
                 foreach($keys as $key) {
-                    if($key != $keys[0]){
-                        // We get rid of repeated choices
+                    if($key != $keys[0]) {
+                        // We get rid of repeated choices.
                         unset($this->base->choices[$key]);
-                        $this->base->right[$key] = $def_key;
-                    }
-                } 
-            }
-        }
+                        $this->base->right[$key] = $defkey;
+                    };
+                };
+            };
+        };
     }
 
     /**
