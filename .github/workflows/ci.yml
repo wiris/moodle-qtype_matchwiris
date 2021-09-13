@@ -56,7 +56,7 @@ jobs:
       - name: Add filter & commons qtype
         run: |
           moodle-plugin-ci add-plugin wiris/moodle-filter_wiris
-          moodle-plugin-ci add-plugin --branch ${GITHUB_REF##*/} wiris/moodle-qtype_wq
+          moodle-plugin-ci add-plugin --branch main wiris/moodle-qtype_wq
 
       - name: Install moodle-plugin-ci
         run: |

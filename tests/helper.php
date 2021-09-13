@@ -37,7 +37,7 @@ require_once($CFG->dirroot . '/question/type/matchwiris/question.php');
  */
 class qtype_matchwiris_test_helper extends question_test_helper {
     public function get_test_questions() {
-        return array('foursubq', 'twosubqformula');
+        return array('foursubq', 'twosubqformula', 'repeatedanswers');
     }
 
     /**
@@ -57,10 +57,10 @@ class qtype_matchwiris_test_helper extends question_test_helper {
         test_question_maker::set_standard_combined_feedback_form_data($q);
 
         $q->subquestions = array(
-            0 => array('text' => 'One', 'format' => FORMAT_HTML),
-            1 => array('text' => 'Two', 'format' => FORMAT_HTML),
-            2 => array('text' => 'Three', 'format' => FORMAT_HTML),
-            3 => array('text' => 'Four', 'format' => FORMAT_HTML));
+            0 => array('text' => 'Five', 'format' => FORMAT_HTML),
+            1 => array('text' => 'Six', 'format' => FORMAT_HTML),
+            2 => array('text' => 'Seven', 'format' => FORMAT_HTML),
+            3 => array('text' => 'Eight', 'format' => FORMAT_HTML));
 
         $q->subanswers = array(
             0 => '#a',
@@ -83,14 +83,14 @@ class qtype_matchwiris_test_helper extends question_test_helper {
                             </property></properties><session version="3.0" lang="en"><task><title>
                             <math xmlns="http://www.w3.org/1998/Math/MathML"><mtext>Sheet 1</mtext></math></title><group><command>
                             <input><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">a</mi><mo>=</mo>
-                            <mn>1</mn></math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn></math>
+                            <mn>5</mn></math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>5</mn></math>
                             </output></command><command><input><math xmlns="http://www.w3.org/1998/Math/MathML">
-                            <mi mathvariant="normal">b</mi><mo>=</mo><mn>2</mn></math></input><output>
-                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn></math></output></command><command><input>
-                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">c</mi><mo>=</mo><mn>3</mn>
-                            </math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3</mn></math></output>
+                            <mi mathvariant="normal">b</mi><mo>=</mo><mn>6</mn></math></input><output>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>6</mn></math></output></command><command><input>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">c</mi><mo>=</mo><mn>7</mn>
+                            </math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>7</mn></math></output>
                             </command><command><input><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">
-                            d</mi><mo>=</mo><mn>4</mn></math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>4
+                            d</mi><mo>=</mo><mn>8</mn></math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>8
                             </mn></math></output></command><command><input><math xmlns="http://www.w3.org/1998/Math/MathML"/>
                             </input></command></group></task></session><constructions><construction group="1">
                             {&quot;elements&quot;:[],&quot;constraints&quot;:[],&quot;displays&quot;:[],&quot;handwriting&quot;:[]}
@@ -151,6 +151,70 @@ class qtype_matchwiris_test_helper extends question_test_helper {
                             <mn>2</mn><mo>·</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mfrac><mn>2</mn><mn>3</mn></mfrac>
                             </math></output></command><command><input><math xmlns="http://www.w3.org/1998/Math/MathML"/></input>
                             </command></group></task></session><constructions><construction group="1">
+                            {&quot;elements&quot;:[],&quot;constraints&quot;:[],&quot;displays&quot;:[],&quot;handwriting&quot;:[]}
+                            </construction></constructions></wiriscalc>]]></wirisCasSession><correctAnswers><correctAnswer>
+                            </correctAnswer></correctAnswers><assertions><assertion name="syntax_math"/>
+                            <assertion name="equivalent_symbolic"><param name="tolerance">0.001</param>
+                            <param name="tolerance_digits">false</param><param name="relative_tolerance">true</param></assertion>
+                            </assertions><slots><slot><initialContent></initialContent></slot></slots></question>';
+        $q->wirislang = 'en';
+
+        return $q;
+    }
+
+    /**
+     * Makes a match question about completing four blanks in some text.
+     * @return object the question definition data, as it might be returned from
+     *      the question editing form.
+     */
+    public function get_matchwiris_question_form_data_repeatedanswers() {
+        $q = new stdClass();
+        $q->name = 'Matching wiris question';
+        $q->questiontext = array('text' => 'Match the numbers.', 'format' => FORMAT_HTML);
+        $q->generalfeedback = array('text' => 'General feedback.', 'format' => FORMAT_HTML);
+        $q->defaultmark = 1;
+        $q->penalty = 0.3333333;
+
+        $q->shuffleanswers = 0;
+        test_question_maker::set_standard_combined_feedback_form_data($q);
+
+        $q->subquestions = array(
+            0 => array('text' => 'Five', 'format' => FORMAT_HTML),
+            1 => array('text' => 'Six', 'format' => FORMAT_HTML),
+            2 => array('text' => 'Six', 'format' => FORMAT_HTML),
+            3 => array('text' => 'Eight', 'format' => FORMAT_HTML));
+
+        $q->subanswers = array(
+            0 => '#a',
+            1 => '#b',
+            2 => '#c',
+            3 => '#d'
+        );
+
+        $q->noanswers = 4;
+
+        // Wiris specific information.
+        $q->wirisquestion = '<question><wirisCasSession><![CDATA[<wiriscalc version="3.2"><title>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mtext>Untitled&#xa0;calc</mtext></math></title>
+                            <properties><property name="decimal_separator">.</property><property name="digit_group_separator">
+                            </property><property name="float_format">mg</property><property name="imaginary_unit">i</property>
+                            <property name="implicit_times_operator">false</property><property name="item_separator">,</property>
+                            <property name="lang">en</property><property name="precision">4</property>
+                            <property name="quizzes_question_options">true</property><property name="save_settings_in_cookies">
+                            false</property><property name="times_operator">·</property><property name="use_degrees">false
+                            </property></properties><session version="3.0" lang="en"><task><title>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mtext>Sheet 1</mtext></math></title><group><command>
+                            <input><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">a</mi><mo>=</mo>
+                            <mn>5</mn></math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>5</mn></math>
+                            </output></command><command><input><math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mi mathvariant="normal">b</mi><mo>=</mo><mn>6</mn></math></input><output>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>6</mn></math></output></command><command><input>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">c</mi><mo>=</mo><mn>6</mn>
+                            </math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>6</mn></math></output>
+                            </command><command><input><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">
+                            d</mi><mo>=</mo><mn>8</mn></math></input><output><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>8
+                            </mn></math></output></command><command><input><math xmlns="http://www.w3.org/1998/Math/MathML"/>
+                            </input></command></group></task></session><constructions><construction group="1">
                             {&quot;elements&quot;:[],&quot;constraints&quot;:[],&quot;displays&quot;:[],&quot;handwriting&quot;:[]}
                             </construction></constructions></wiriscalc>]]></wirisCasSession><correctAnswers><correctAnswer>
                             </correctAnswer></correctAnswers><assertions><assertion name="syntax_math"/>
