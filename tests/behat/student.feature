@@ -1,4 +1,4 @@
-@javascript @qtype_matchwiris @studentwiris
+@javascript @qtype_matchwiris @studentwiris @wqmdl-271
 Feature: Student answers a quiz with a Matching (WIRIS) question
 
     Background:
