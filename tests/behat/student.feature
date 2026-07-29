@@ -1,4 +1,4 @@
-@qtype_matchwiris @wq @javascript @student @attempt @regression
+@qtype @qtype_matchwiris @wq @javascript @student @attempt @regression
 Feature: Student answers a quiz with a Matching (WIRIS) question
 
     Background:
