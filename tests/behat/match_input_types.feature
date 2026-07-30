@@ -1,4 +1,4 @@
-@qtype_matchwiris @wq @javascript @student @attempt @inputoptions @regression
+@qtype @qtype_matchwiris @wq @javascript @student @attempt @inputoptions @regression
 Feature: Matching (WIRIS) answer input option
     In order to trust the Matching (WIRIS) answer input
     As a student
